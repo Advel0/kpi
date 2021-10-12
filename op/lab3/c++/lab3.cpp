@@ -11,15 +11,14 @@ int main(){
     cin >> x;
     lnPrevious = pow(-1,(n-1)) * float(pow(x,n))/n;
     n++;
-    cout << lnPrevious<<endl;
+
     ln = lnPrevious +  pow(-1,(n-1)) * float(pow(x,n))/n;
     n++;
-    cout << ln<<endl;
     while ( abs(ln - lnPrevious) > e) {
         lnPrevious = ln;
         ln +=  pow(-1,(n-1)) * float(pow(x,n))/n;
+        cout << endl<< lnPrevious ;
         n++;
     }  
-    cout << ln;
-    cout << endl<< n;
+ 
     return 0;}
