@@ -9,14 +9,11 @@ int main(){
     int n=1;
     cout << "Enter value of the \'x\': ";
     cin >> x;
-    ln = lnPrevious +  pow(-1,(n-1)) * float(pow(x,n))/n;
-    cout << ln<<endl;
-    n++;
-    while ( abs(ln - lnPrevious) > e) {
+    do {
         lnPrevious = ln;
         ln +=  pow(-1,(n-1)) * float(pow(x,n))/n;
         n++;
-    }  
+    }  while ( abs(ln - lnPrevious) > e);
     cout << ln; 
     return 0;
     }
