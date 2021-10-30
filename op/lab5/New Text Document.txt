@@ -1,0 +1,25 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int p, q;
+    cin >> p >> q;
+    for (int i = 1; i < p; i++) {
+        if (p % i == 0) {
+            int a = i;
+            int b = q;
+            // Euclid algorithm
+            while (a != 0 && b != 0) {
+                if (a > b) {
+                    a %= b;
+                }
+                else {
+                    b %= a;
+                }
+            }
+            if (a + b == 1) cout << i << endl;
+        }
+    }
+    return 0;
+}
