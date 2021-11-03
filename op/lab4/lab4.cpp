@@ -15,6 +15,6 @@ int main(){
         currentMember = pow(-1,i+1) * (pow(x,i)/i);
         S+=currentMember;
     }
-    cout << S;
+    cout << "Sum: "<< S;
     return 0;
     }
