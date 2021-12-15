@@ -71,7 +71,7 @@ int* findMinDistPoints(double** arr, int n) {
 
     int j ;
 
-    // Searching through all the point to find two with the least distance between them
+    // Searching through all the points to find two with the least distance between them
     for (int i=0; i<n; i++) { 
         j=i+1;
         while(j<n) {
