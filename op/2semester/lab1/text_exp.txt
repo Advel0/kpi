@@ -1,0 +1,4 @@
+wordd
+no wordo
+char::
+cc

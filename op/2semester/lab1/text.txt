@@ -1,0 +1,4 @@
+word
+no word
+char:
+c

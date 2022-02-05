@@ -5,8 +5,8 @@
 
 using namespace std;
 
-void manage_input( string ,string ); // fstream*
-void export_data ( string ); // fstream* 
+void manage_input( string ,string );
+void export_data ( string, string );
 
 int main()
 {
@@ -14,12 +14,11 @@ int main()
 	string path;
 	string path_export;
 	string state;
-//	fstream file;
 	
 	
 	cout << "Enter file path/name: ";
 	cin >> path;
-	cout << "You want ro rewrite(W) or edit the file(E): ";
+	cout << "You want ro rewrite/write(W) or edit the file(E): ";
 	cin >> state;
 	
 	manage_input( path, state ); // "&file"
@@ -30,19 +29,47 @@ int main()
 
 	if ( path_export != "N" )
 	{
-		export_data( path_export );
+		export_data( path, path_export );
 	}	
 
 	return 0;
 }
 
-void export_data( string path )
+void export_data( string path, string path_exp )
 {
-	fstream file;
-	file.open( path );
+	fstream file, file_exp;
+	string line;
+	char ch;
+	
+	file.open( path, ios::in );
+	file_exp.open( path_exp, ios::out | ios::trunc );
+
+
+	while ( !file.eof() )
+	{
+		getline( file, line );
+		
+		if( line == "" ) continue;
+		
+		int counter = 0;
+
+		while( line[counter] != ' ' && counter < line.length() ) 
+		{
+			counter++;
+		}
+		
+		ch = line[counter-1];
+		line += ch;
+
+		file_exp << line << endl;
+
+	}
+
+	file.close();
+	file_exp.close();
 }
 
-void manage_input( string path, string state ) // fstream* file
+void manage_input( string path, string state ) 
 {	
 	fstream file;
 	string input;
