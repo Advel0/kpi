@@ -12,13 +12,15 @@ int main(){
     cin >> file_name;
 
     content = get_input();
-    cout << endl << "Entered text : " << endl;
-    cout << content;
+    
 
     cout << "Wrtire or extend file? W/E : ";
     cin >> mode;
 
     save_file(file_name,content, mode);
+
+    cout << endl << "Content of file " + file_name + " : " << endl;
+    cout << get_file_cont(file_name);
 
     export_data(file_name);
 
