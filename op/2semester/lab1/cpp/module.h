@@ -1,17 +1,24 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 
 using namespace std;
 
-// Created by advel on 2/8/2022.
-//
+enum writingMode;
 
-#ifndef PROJ1_MODULE_H
-#define PROJ1_MODULE_H
+string getFileName();
 
-#endif //PROJ1_MODULE_H
+string getInput();
 
-void export_data(string file_name) ;
-void save_file(string file_name, string content, string mode);
-string get_input();
-string get_file_cont(string file_name);
+writingMode getWritingMode();
+
+void writeToFile(string _fileName, string _content, writingMode _wm);
+
+void exportData(string _fileName);
+
+void showFileContent(string _fileName, string _message);
+
+enum writingMode {
+    writeFile,
+    extendFile
+};

@@ -1,30 +1,23 @@
 #include <iostream>
 #include "module.h"
-#include <fstream>
 
 using namespace std;
 
-int main(){
 
-    string file_name,content ,mode;
-
-    cout << "Enter file name (.txt only) : " ;
-    cin >> file_name;
-
-    content = get_input();
+int main()
+{
     
+    string fileName, content;
 
-    cout << "Wrtire or extend file? W/E : ";
-    cin >> mode;
+    fileName = getFileName();
+    content = getInput();
+    writingMode wm = getWritingMode();
 
-    save_file(file_name,content, mode);
+    writeToFile(fileName, content, wm);
+    exportData(fileName);
+    showFileContent(fileName, "Initial Text Data: ");
+    showFileContent(fileName.substr(0, fileName.length() - 4) + "_exp.txt", "Processed Text Data:");
+   
 
-    cout << endl << "Content of file " + file_name + " : " << endl;
-    cout << get_file_cont(file_name);
-
-    export_data(file_name);
-
-    cout << endl << "Content of file " + file_name.substr(0, file_name.length()-4) + "_exp.txt (text changed as asked in the task) : "  << endl;
-    cout << get_file_cont(file_name.substr(0, file_name.length()-4) + "_exp.txt" );
     return 0;
 }

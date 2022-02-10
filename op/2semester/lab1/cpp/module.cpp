@@ -1,104 +1,98 @@
 #include <iostream>
 #include <fstream>
-
+#include <string>
+#include "module.h"
 
 using namespace std;
 
-void export_data(string file_name) {
-    char ch;
+string getFileName() {
+    string _fileName;
+
+    cout << "Enter file name: ";
+    cin >> _fileName;
+
+    return _fileName;
+}
+
+string getInput() {
+    string _content, line;
+
+    cout << "Write your text ( to end enter Ctrl + X ): " << endl;
+    cin.ignore();
+    getline(cin, line);
+
+    while (int(line[0]) != 24) {  //
+        _content += line + '\n';
+        getline(cin, line);
+    }
+
+    return _content;
+}
+
+writingMode getWritingMode() {
+    writingMode _wm = writeFile;
+    string _input;
+
+    cout << "Please chose a writing mode ( W - rewrite/write | E - extend) : ";
+    cin >> _input;
+
+    if (_input == "W") {
+
+    }
+    else if (_input == "E") {
+        _wm = extendFile;
+    }
+    else {
+        cout << "Incorrent mode, writing mode set to default (Write file)";
+    }
+
+    return _wm;
+};
+
+void writeToFile(string _fileName, string _content, writingMode _wm) {
+    ofstream file(_fileName, _wm == writingMode::writeFile ? ios::trunc | ios::out : ios::app );
+    file << _content;
+
+    file.close();
+
+}
+
+void exportData(string _fileName) {
     string line;
-    fstream file(file_name, ios::in);
-    fstream file_exp( (file_name.substr(0, file_name.length()-4) + "_exp.txt"),ios::out | ios::trunc);
+    ifstream file(_fileName, ios::in);
+    ofstream fileExp(_fileName.substr(0, _fileName.length() - 4) + "_exp.txt", ios::trunc | ios::out);
 
-    while ( !file.eof() )
-    {
-        getline( file, line );
+    while (!file.eof()) {
+        getline(file, line);
 
-        if( line == "" ) continue;
+        if (line == "") continue;
 
         int counter = 0;
 
-        while( line[counter] != ' ' && counter < line.length() )
+        while (line[counter] != ' ' && counter < line.length())
         {
             counter++;
         }
 
-        ch = line[counter-1];
-        line += ch;
+        line += line[counter - 1];
 
-        file_exp << line << endl;
-
-    }
+        fileExp << line << endl;
+    };
 
     file.close();
-    file_exp.close();
+    fileExp.close();
 }
 
 
+void showFileContent(string _fileName, string _message) {
+    string line;
+    ifstream file(_fileName, ios::in);
+    cout << endl << _message << endl;
 
-void export_data( string path, string path_exp )
-{
-	fstream file, file_exp;
-	string line;
-	char ch;
-	
-	file.open( path, ios::in );
-	file_exp.open( path_exp, ios::out | ios::trunc );
-
-
-	while ( !file.eof() )
-	{
-		getline( file, line );
-		
-		if( line == "" ) continue;
-		
-		int counter = 0;
-
-		while( line[counter] != ' ' && counter < line.length() ) 
-		{
-			counter++;
-		}
-		
-		ch = line[counter-1];
-		line += ch;
-
-		file_exp << line << endl;
-
-	}
-
-	file.close();
-	file_exp.close();
-}
-
-void save_file(string file_name, string content, string mode){
-    fstream file(file_name, mode == "W" ? ios::out | ios::trunc : ios::app);
-    file << content;
+    while (!file.eof()) {
+        getline(file, line);
+        cout << line <<endl; 
+    }
     file.close();
-}
 
-string get_input(){
-    string inp, line;
-    cout << "Enter you text (:q to end):" << endl;
-    cin.ignore();
-
-    getline(cin, line);
-    while ( line != ":q" )
-    {
-        inp += line + '\n';
-        getline(cin, line);
-    }
-
-    return inp;
-}
-
-string get_file_cont(string file_name){
-    fstream file(file_name, ios::in);
-    string cont, line;
-
-    while ( !file.eof() )
-    {
-        getline(file, line );
-        cont += line + '\n';
-    }
-    return cont;
 }
